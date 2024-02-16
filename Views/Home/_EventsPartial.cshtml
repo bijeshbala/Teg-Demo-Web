@@ -1,0 +1,16 @@
+﻿@model List<Event>
+
+<div class="event-container">
+    @foreach (var evnt in Model)
+    {
+        <div class="event-box">
+            <h3>@evnt.Name</h3>
+            <p>Date: @evnt.StartDate</p>
+            <div class="event-popup">
+                <p>Name: @evnt.Name</p>
+                <p>Description: @evnt.Description</p>
+                <p>Date: @evnt.StartDate</p>
+            </div>
+        </div>
+    }
+</div>

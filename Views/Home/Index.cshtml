@@ -1,8 +1,49 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@model List<Venue>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@{
+    ViewData["Title"] = "Venues";
+}
+
+<form id="venueForm">
+    <label for="venueDropdown">Select Venue:</label>
+    <select id="venueDropdown" name="selectedVenue">
+        <option value="">-- Select Venue --</option>
+        @foreach (var venue in Model)
+        {
+            <option value="@venue.Id">@venue.Name</option>
+        }
+    </select>
+</form>
+
+<div id="eventsContainer"></div>
+<div id="loadingText" style="display:none;">Loading...</div>
+
+@section Scripts {
+    <script>
+        document.getElementById('venueDropdown').addEventListener('change', function () {
+            var selectedVenueId = this.value;
+            var loadingText = document.getElementById('loadingText');
+            var eventsContainer = document.getElementById('eventsContainer');
+            if (selectedVenueId !== '') {
+                loadingText.style.display = 'block'; // Show loading text
+                eventsContainer.innerHTML = ''; // Clear events container
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', '/Home/GetEvents?selectedVenueId=' + selectedVenueId, true);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                        loadingText.style.display = 'none'; // Hide loading text
+                        eventsContainer.innerHTML = xhr.responseText; // Update events container with response
+                    }
+                };
+                xhr.send();
+            } else {
+                eventsContainer.innerHTML = '';
+            }
+        });
+    </script>
+}
+
+

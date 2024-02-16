@@ -20,3 +20,67 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+main {
+    width: 75%; /* Set the width to 75% */
+    margin: auto; /* Center the container horizontally */
+}
+
+#venueForm {
+    width: 70%; /* Set the width to 70% */
+    margin: auto; /* Center the container horizontally */
+    text-align: center; /* Center the content within the container */
+}
+
+/* Define a container for the events */
+.event-container {
+    margin: auto; /* Center the container horizontally */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+/* Define styles for each event box */
+.event-box {
+    position: relative; /* Make the event box container relative */
+    width: calc(33% - 20px); /* Adjust the width based on the desired layout */
+    margin: 10px;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.event-popup {
+    display: none;
+    position: absolute;
+    top: 100%; /* Position the popup below the event box */
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Show the popup when hovering over the event box */
+.event-box:hover .event-popup {
+    display: block;
+}
+
+/* Media query for responsiveness */
+@media screen and (max-width: 768px) {
+    .event-box {
+        width: calc(50% - 20px); /* Adjust for smaller screens */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .event-box {
+        width: calc(100% - 20px); /* Adjust for mobile screens */
+    }
+}
+
